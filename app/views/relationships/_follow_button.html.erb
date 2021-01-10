@@ -1,0 +1,14 @@
+<!- 参考コード progate Ruby on Rails5 https://prog-8.com/languages/rails5->
+    <% unless @this_user == @user %>
+    <% if @this_user.following?(@user) %>
+    <%= form_for(@this_user.relationships.find_by(follow_id: @user.id), html: { method: :delete }) do |f| %>
+    <%= hidden_field_tag :follow_id, @user.id %>
+    <%= f.submit 'Unfollow', class: 'btn btn-danger btn-block' %>
+    <% end %>
+    <% else %>
+    <%= form_for(@this_user.relationships.build) do |f| %>
+    <%= hidden_field_tag :follow_id, @user.id %>
+    <%= f.submit 'Follow', class: 'btn btn-primary btn-block' %>
+    <% end %>
+    <% end %>
+    <% end %>

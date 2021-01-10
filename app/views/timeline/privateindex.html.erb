@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        let ban = new Array();
+        let kifi = 1;
+    </script>
+    <% @kifi = 1 %>
+</head>
+
+<body>
+    <h1 class="pagetitle">タイムライン</h1>
+    <div class="newform">
+        <%= form_tag("/timeline/create", {multipart: true}) do %>
+        <img src="<%= "/icon/#{@this_user.icon_path} " %> " width=" 50" height="50" class="newicon">
+        <textarea name="text" class="newtext"></textarea>
+        <input name="kifu" type="file" accept=".kif">
+        <input type="submit" value="投稿">
+
+        <% end %>
+    </div>
+
+    <% @posts.each do |post| %>
+    <div class="post">
+        <img src="<%= "/icon/#{post.showuserinfo.icon_path} " %> " width=" 50" height="50">
+        <%= link_to(post.showuserinfo.name, "/users/#{post.showuserinfo.id}" ,{class: "postuser"}) %>
+        <div class="timeline">
+            <a class="postcom"><%= "#{post.comment}"%></a>
+        </div>
+        <br>
+        <% if post.kif_path%>
+        <a hidden id="<%= @kifi %>"><%="/kifu/#{post.kif_path}" %></a>
+        <div class="ban">
+            <script>
+                ban[kifi] = KifuForJS.load(document.getElementById(kifi).textContent, );
+                kifi++;
+            </script>
+        </div>
+
+        <% @kifi += 1%>
+        <%end%>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <%= link_to("詳細", "/timeline/#{post.id}" ,{class: "detale"}) %>
+
+
+
+    </div>
+    <% end %>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+<h1 class="pagetitle">新規投稿</h1>
+<div class="newform">
+    <%= form_tag("/timeline/create", {multipart: true}) do %>
+    <img src="<%= "/icon/#{@this_user.icon_path} " %> " width=" 50" height="50" class="newicon">
+    <textarea name="text" class="newtext"></textarea>
+    <input name="kifu" type="file" accept=".kif">
+    <input type="submit" value="投稿">
+    <% end %>
+</div>

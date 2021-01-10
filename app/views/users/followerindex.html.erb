@@ -1,0 +1,11 @@
+<h1 class="pagetitle">フォロワー</h1>
+<div class="followlist">
+    <% @user.followers.each do |fuser| %>
+
+    <div class="userdetale followuserdetale">
+        <img src="<%= "/icon/#{fuser.icon_path}" %>" width="50" height="50" class="followicondetale">
+        <%= link_to("#{fuser.name}", "/users/#{fuser.id}", { class: "fusername" }) %>
+    </div>
+
+    <% end %>
+</div>

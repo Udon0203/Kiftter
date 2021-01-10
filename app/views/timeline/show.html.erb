@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/kifu-for-js@2/bundle/kifu-for-js.min.js" charset="utf-8"></script>
+    <script>
+        let ban = new Array();
+        let kifi = 1;
+    </script>
+    <% @kifi = 1 %>
+</head>
+<h1 class="pagetitle">詳細</h1>
+
+<body>
+    <div class="post">
+        <img src="<%= "/icon/#{@post.showuserinfo.icon_path} " %> " width=" 50" height="50">
+        <%= link_to(@post.showuserinfo.name, "/users/#{@post.showuserinfo.id}" ,{class: "postuser"}) %>
+        <div class="timeline">
+            <a class="postcom"><%= "#{@post.comment}"%></a>
+        </div>
+        <br>
+        <% if @post.kif_path%>
+        <a hidden id="<%= @kifi %>"><%="/kifu/#{@post.kif_path}" %></a>
+        <div class="ban">
+            <script>
+                ban[kifi] = KifuForJS.load(document.getElementById(kifi).textContent, );
+                kifi++;
+            </script>
+        </div>
+        <% @kifi += 1 %>
+        <% end %>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true" data-text="棋譜を共有しよう" data-hashtags="kiftter">Tweet</a>
+    </div>
+</body>
+
+
+</html>

@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kifu: MyText
+  comment: MyText
+
+two:
+  kifu: MyText
+  comment: MyText

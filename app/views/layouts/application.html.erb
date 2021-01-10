@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Final</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://cdn.jsdelivr.net/npm/kifu-for-js@2/bundle/kifu-for-js.min.js" charset="utf-8"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <h1 class="sitetitle">棋譜ったー</h1>
+        </div>
+
+        <ul>
+            <% if session[:userid] %>
+            <img src="<%= "/icon/#{@this_user.icon_path} " %> " width=" 50" height="50" class="menuicon" />
+            <input type="checkbox" id="menucheck1" class="menucheck" />
+            <label class="menulabel" for="menucheck1"><%= @this_user.name %></label>
+
+            <div class="menu_cnt">
+
+                <p>
+                    <%= link_to("タイムライン", "/timeline") %>
+                </p>
+                <p>
+                    <%= link_to("投稿", "/timeline/new") %>
+                </p>
+                <p>
+                    <%= link_to("ユーザー情報編集", "/users/#{@this_user.id}/edit")  %>
+                </p>
+                <p>
+                    <%= link_to("ログアウト", "/logout", method: :post) %>
+                </p>
+
+            </div>
+            <%else%>
+            <input type="checkbox" id="menucheck1" class="menucheck" />
+            <label class="menulabel" for="menucheck1">始めましょう。</label>
+
+            <div class="menu_cnt">
+                <p>
+                    <%= link_to("新規登録", "/regist") %>
+                </p>
+                <p>
+                    <%= link_to("ログイン", "/login") %>
+                </p>
+            </div>
+            <%end%>
+        </ul>
+    </header>
+    <%= yield %>
+
+    <body>
+        <div class="menu">
+            <% if session[:userid] %>
+            <p>
+                <%= link_to("全体タイムライン", "/timeline") %>
+            </p>
+            <p>
+                <%= link_to("タイムライン", "/privatetimeline") %>
+            </p>
+            <p>
+                <%= link_to("投稿", "/timeline/new") %>
+            </p>
+
+            <p>
+                <%= link_to("ログアウト", "/logout", method: :post) %>
+            </p>
+
+            <%else%>
+
+            <p>
+                <%= link_to("新規登録", "/regist") %>
+            </p>
+            <p>
+                <%= link_to("ログイン", "/login") %>
+            </p>
+        </div>
+        <%end%>
+    </body>
+
+</html>

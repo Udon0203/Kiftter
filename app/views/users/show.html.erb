@@ -1,0 +1,63 @@
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/kifu-for-js@2/bundle/kifu-for-js.min.js" charset="utf-8"></script>
+    <script>
+        let ban = new Array();
+        let kifi = 1;
+    </script>
+    <% @kifi = 1 %>
+</head>
+
+<body>
+    <h1 class="pagetitle">ユーザー詳細</h1>
+    <div class="user">
+        <div class="userdetale">
+            <img src="<%= "/icon/#{@user.icon_path}" %>" width="100" height="100" class="icondetale">
+            <p class="namedetale"><%= @user.name %></p>
+            <%= render 'relationships/follow_button', user: @user %>
+            <div class="followfollower">
+                <%= link_to("フォロー", "/users/followindex/#{@user.id}" ,{class: "followlink"}) %>
+                <% fnum = 0%>
+                <% @user.followings.each do %>
+                <% fnum += 1 %>
+                <% end %>
+                <%= fnum %>
+
+                <%= link_to("フォロワー", "/users/followerindex/#{@user.id}" ,{class: "followlink"}) %>
+                <% fwnum = 0%>
+                <% @user.followers.each do %>
+                <% fwnum += 1 %>
+                <% end %>
+                <%= fwnum %>
+            </div>
+            <% if @this_user.id == @user.id%>
+            <%= link_to("編集", "/users/#{@user.id}/edit" ,{class: "edit"})  %>
+            <% end %>
+        </div>
+
+        <% @user.searchposts.each do |post|%>
+        <div class="post">
+            <img src="<%= "/icon/#{post.showuserinfo.icon_path} " %> " width=" 50" height="50">
+            <%= link_to(post.showuserinfo.name, "/users/#{post.showuserinfo.id}" ,{class: "postuser"}) %>
+            <div class="timeline">
+                <a class="postcom"><%= "#{post.comment}"%></a>
+            </div>
+            <br>
+            <% if post.kif_path%>
+            <a hidden id="<%= @kifi %>"><%="/kifu/#{post.kif_path}" %></a>
+            <div class="ban">
+                <script>
+                    ban[kifi] = KifuForJS.load(document.getElementById(kifi).textContent, );
+                    kifi++;
+                </script>
+            </div>
+
+            <% @kifi += 1%>
+            <%end%>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <%= link_to("詳細", "/timeline/#{post.id}" ,{class: "detale"}) %>
+
+        </div>
+        <%end%>
+
+    </div>
+</body>
